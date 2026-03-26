@@ -1,121 +1,97 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import "./styles.css";
+import { useState, useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [secretWord, setSecretWord] = useState("");
+  const [guesses, setGuesses] = useState([]);
+  const [currentGuess, setCurrentGuess] = useState("");
+  const [status, setStatus] = useState("loading");
+
+useEffect(() => {
+  const words = [
+    "ABOUT", "OTHER", "WHICH", "THEIR", "THERE",
+    "APPLE", "TRAIN", "PLANT", "BRICK", "CHAIR",
+    "WATER", "LIGHT", "HOUSE", "SOUND", "WORLD"
+  ];
+
+  const randomWord = words[Math.floor(Math.random() * words.length)];
+
+  setSecretWord(randomWord);
+  setStatus("playing");
+}, []);
+
+  // handleSubmit lives here, before the return
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (currentGuess.length !== 5) return;   // fixed typo: currentGuess
+    if (status !== "playing") return;
+
+    const newGuesses = [...guesses, currentGuess];
+    setGuesses(newGuesses);
+    setCurrentGuess("");
+
+    if (currentGuess === secretWord) {
+      setStatus("won");
+    } else if (newGuesses.length === 5) {    // use newGuesses, not guesses
+      setStatus("lost");
+    }
+  };
+
+  // Cell color logic
+  const getCellColor = (guess, colIndex) => {
+    if (!guess) return "white";
+   const letter = guess[colIndex] || ""; //prevent undefined error when guess is shorter than 5 letters
+    if (secretWord[colIndex] === letter) return "green";      // right spot
+    if (secretWord.includes(letter)) return "yellow";         // wrong spot
+    return "red";                                             // not in word
+  };
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div>
+      <h1>Wordle Game</h1>
 
-      <div className="ticks"></div>
+      {/* Grid with coloring */}
+      {Array.from({ length: 5 }).map((_, rowIndex) => (
+        <div key={rowIndex} style={{ display: "flex" }}>
+          {Array.from({ length: 5 }).map((_, colIndex) => {
+            const guess = guesses[rowIndex] || "";
+            const letter = guess[colIndex] || "";
+            const bg = guess ? getCellColor(guess, colIndex) : "white";
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+            return (
+              <div
+                key={colIndex}
+                className="guess-letter"
+                style={{ backgroundColor: bg, margin: 2 }}
+              >
+                {letter}
+              </div>
+            );
+          })}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      ))}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Win/loss messages */}
+      {status === "won" && <p>You've won! 🎉</p>}
+      {status === "lost" && <p>You've lost! The word was {secretWord}.</p>}
+
+      {/* Form is inside the return, only shown while playing */}
+      {status === "playing" && (
+        <form onSubmit={handleSubmit}>
+          <input
+            value={currentGuess}
+            onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
+            maxLength={5}
+            placeholder="Enter guess"
+          />
+          <button type="submit">Guess</button>
+        </form>
+      )}
+    </div>
+  );
 }
-
-export default App
