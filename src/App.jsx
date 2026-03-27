@@ -69,66 +69,68 @@ export default function App() {
   }
 
   return (
-    <div>
-      <h1>Wordle Game</h1>
+    <div className="app">
+      <div className="game-container">
+        <h1 className="title">Wordle</h1>
 
-      {/* Grid */}
-      {Array.from({ length: 5 }).map((_, rowIndex) => {
-        const guess = guesses[rowIndex] || "";
-        const colors = guess ? getCellColors(guess, secretWord) : Array(5).fill("white");
+        {/* Grid */}
+        {Array.from({ length: 5 }).map((_, rowIndex) => {
+          const guess = guesses[rowIndex] || "";
+          const colors = guess ? getCellColors(guess, secretWord) : Array(5).fill("white");
 
-        return (
-          <div key={rowIndex} style={{ display: "flex" }}>
-            {Array.from({ length: 5 }).map((_, colIndex) => {
-              const letter = guess[colIndex] || "";
-              const bg = colors[colIndex];
-              return (
-                <div
-                  key={colIndex}
-                  className="guess-letter"
-                  style={{
-                    backgroundColor: bg,
-                    width: 40,
-                    height: 40,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: 2,
-                    fontWeight: "bold",
-                    fontSize: 20,
-                    color: bg === "red" ? "white" : "black",
-                  }}
-                >
-                  {letter}
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
+          return (
+            <div key={rowIndex} style={{ display: "flex" }}>
+              {Array.from({ length: 5 }).map((_, colIndex) => {
+                const letter = guess[colIndex] || "";
+                const bg = colors[colIndex];
+                return (
+                  <div
+                    key={colIndex}
+                    className="guess-letter"
+                    style={{
+                      backgroundColor: bg,
+                      width: 40,
+                      height: 40,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      margin: 2,
+                      fontWeight: "bold",
+                      fontSize: 20,
+                      color: bg === "red" ? "white" : "black",
+                    }}
+                  >
+                    {letter}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
 
-      {/* Win/loss messages */}
-      {status === "won" && <p>You've won! 🎉</p>}
-      {status === "lost" && <p>You've lost! The word was {secretWord}.</p>}
+        {/* Win/loss messages */}
+        {status === "won" && <p>You've won! 🎉</p>}
+        {status === "lost" && <p>You've lost! The word was {secretWord}.</p>}
 
-      {/* Guess form */}
-      {status === "playing" && (
-       <form onSubmit={handleSubmit} className="form">
-  <div className="input-wrapper">
-    <input
-      className="input-modern"
-      value={currentGuess}
-      onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
-      maxLength={5}
-      placeholder="ENTER GUESS"
-    />
-  </div>
+        {/* Guess form */}
+        {status === "playing" && (
+          <form onSubmit={handleSubmit} className="form">
+            <div className="input-wrapper">
+              <input
+                className="input-modern"
+                value={currentGuess}
+                onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
+                maxLength={5}
+                placeholder="ENTER GUESS"
+              />
+            </div>
 
-  <button className="btn-primary" type="submit">
-    Guess
-  </button>
-</form>
-      )}
+            <button className="btn-primary" type="submit">
+              Guess
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
