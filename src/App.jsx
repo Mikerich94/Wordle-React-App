@@ -75,9 +75,11 @@ export default function App() {
         <div className="instructions">
         <p>Try to guess the 5 letter word. You have 5 attempts to do so.</p>
         <p>As you guess, letters will change color to indicate how close your guess is to the secret word.</p>
-        <p style={{ color: "green" }}>Green: Correct letter in the correct position</p>
-        <p style={{ color: "#b59f3b" }}>Yellow: Correct letter in the wrong position</p>
-        <p style={{ color: "red" }}>Red: Letter not in the word</p>
+       <ul style={{ margin:0}}>
+        <li style={{ color: "green" }}>Green: Correct letter in the correct position</li>
+        <li style={{ color: "#b59f3b" }}>Yellow: Correct letter in the wrong position</li>
+        <li style={{ color: "red" }}>Red: Letter not in the word</li>
+        </ul>
         </div>
         {/* Grid */}
         {Array.from({ length: 5 }).map((_, rowIndex) => {
