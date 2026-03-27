@@ -107,9 +107,6 @@ body {
   margin-bottom:16px;
 }
 
-.instructions p:last-of-type {
-  margin-bottom:0;
-}
 
 /* Modern input */
 .input-modern {
