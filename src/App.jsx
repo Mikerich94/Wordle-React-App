@@ -72,7 +72,13 @@ export default function App() {
     <div className="app">
       <div className="game-container">
         <h1 className="title">Wordle</h1>
-
+        <div className="instructions">
+        <p>Try to guess the 5 letter word. You have 5 attempts to do so.</p>
+        <p>As you guess, letters will change color to indicate how close your guess is to the secret word.</p>
+        <p style={{ color: "green" }}>Green: Correct letter in the correct position</p>
+        <p style={{ color: "yellow" }}>Yellow: Correct letter in the wrong position</p>
+        <p style={{ color: "red" }}>Red: Letter not in the word</p>
+        </div>
         {/* Grid */}
         {Array.from({ length: 5 }).map((_, rowIndex) => {
           const guess = guesses[rowIndex] || "";

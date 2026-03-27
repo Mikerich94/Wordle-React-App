@@ -101,6 +101,10 @@ body {
     margin-top:0;
 }
 
+.instructions {
+  max-width:500px;
+}
+
 /* Modern input */
 .input-modern {
   width: 100%;
