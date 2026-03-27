@@ -23,9 +23,6 @@ body {
     margin: 0;
 }
 
-form {
-    margin-top:30px;
-}
 
 .btn-primary {
   position: relative;
@@ -91,7 +88,7 @@ form {
 }
 
 .form {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   gap: 10px;
 }
@@ -99,6 +96,9 @@ form {
 /* Wrapper gives us more control */
 .input-wrapper {
   flex: 1;
+}
+.title {
+    margin-top:0;
 }
 
 /* Modern input */

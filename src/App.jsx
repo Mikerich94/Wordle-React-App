@@ -79,7 +79,7 @@ export default function App() {
           const colors = guess ? getCellColors(guess, secretWord) : Array(5).fill("white");
 
           return (
-            <div key={rowIndex} style={{ display: "flex" }}>
+            <div className="guess-row" key={rowIndex} style={{ display: "flex"; justifyContent: "center" }}>
               {Array.from({ length: 5 }).map((_, colIndex) => {
                 const letter = guess[colIndex] || "";
                 const bg = colors[colIndex];
