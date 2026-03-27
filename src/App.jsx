@@ -120,7 +120,7 @@ export default function App() {
             maxLength={5}
             placeholder="Enter guess"
           />
-          <button type="submit">Guess</button>
+          <button class="btn-primary" type="submit">Guess</button>
         </form>
       )}
     </div>
