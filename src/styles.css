@@ -89,3 +89,71 @@ form {
 .btn-primary.loading .btn-loader {
   display: inline-block;
 }
+
+.form {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Wrapper gives us more control */
+.input-wrapper {
+  flex: 1;
+}
+
+/* Modern input */
+.input-modern {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 14px;
+
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 4px; /* 🔥 makes guesses feel intentional */
+
+  text-transform: uppercase;
+
+  border-radius: 12px;
+  border: none;
+
+  background: #f3f4f6;
+  color: #111827;
+
+  outline: none;
+  transition: all 0.2s ease;
+
+  box-shadow: inset 0 0 0 1px #e5e7eb;
+}
+
+/* Placeholder styling */
+.input-modern::placeholder {
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* Hover */
+.input-modern:hover {
+  background: #ffffff;
+}
+
+/* Focus state (this is key for modern feel) */
+.input-modern:focus {
+  background: #ffffff;
+  box-shadow: 
+    inset 0 0 0 2px #6366f1,
+    0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Optional: slight press effect */
+.input-modern:active {
+  transform: scale(0.99);
+}
+
+/* Mobile friendliness */
+@media (max-width: 500px) {
+  .form {
+    flex-direction: column;
+  }
+}

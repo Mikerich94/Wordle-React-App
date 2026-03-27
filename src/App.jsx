@@ -113,15 +113,21 @@ export default function App() {
 
       {/* Guess form */}
       {status === "playing" && (
-        <form onSubmit={handleSubmit} style={{ marginTop: 10 }}>
-          <input
-            value={currentGuess}
-            onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
-            maxLength={5}
-            placeholder="Enter guess"
-          />
-          <button class="btn-primary" type="submit">Guess</button>
-        </form>
+       <form onSubmit={handleSubmit} className="form">
+  <div className="input-wrapper">
+    <input
+      className="input-modern"
+      value={currentGuess}
+      onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
+      maxLength={5}
+      placeholder="ENTER GUESS"
+    />
+  </div>
+
+  <button className="btn-primary" type="submit">
+    Guess
+  </button>
+</form>
       )}
     </div>
   );
