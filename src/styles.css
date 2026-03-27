@@ -103,6 +103,7 @@ body {
 
 .instructions {
   max-width:500px;
+  margin-bottom:16px;
 }
 
 .instructions p:last-of-type {
