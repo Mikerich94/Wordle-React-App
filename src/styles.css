@@ -271,6 +271,7 @@ form {
 
 .guess-form {
   display: flex;
+  flex-wrap:wrap;
   justify-content: center;
   gap: 6px; /* spacing between input and button */
   width: 100%; /* matches wrapper width */
@@ -285,7 +286,6 @@ form {
 }
 
 .guess-form button {
-  width: 60px;
   font-weight: bold;
   background-color: #4caf50;
   color: white;
