@@ -122,6 +122,8 @@ export default function App() {
 
   {/* Guess form */}
   {status === "playing" && (
+  <div>
+    {error && <p className="error-message" style={{ color: "red", marginTop: "0.5rem" }}>{error}</p>}
     <form onSubmit={handleSubmit} className="guess-form">
       <input
         value={currentGuess}
@@ -133,7 +135,8 @@ export default function App() {
       />
       <button type="submit">Guess</button>
     </form>
-  )}
+  </div>
+)}
 </div>
       </div>
     </div>
