@@ -112,6 +112,8 @@ export default function App() {
                       fontWeight: "bold",
                       fontSize: 20,
                       color: bg === "red" ? "white" : "black",
+                      border: "2px solid #ccc",   // <--- add this
+                      boxSizing: "border-box",    // ensures border doesn't mess layout
                     }}
                   >
                     {letter}
