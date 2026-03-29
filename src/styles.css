@@ -237,9 +237,6 @@ button:active {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-form {
-  margin-top:16px;
-}
 
 .game-wrapper {
   max-width: 240px; /* 5 boxes * 40px + 4 * 2px margin each = ~240 */
