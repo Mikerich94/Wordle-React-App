@@ -88,7 +88,7 @@ body {
 }
 
 .form {
-  margin-top: 20px;
+  margin-top: 0;
   display: flex;
   gap: 10px;
 }
