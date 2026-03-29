@@ -8,6 +8,7 @@ export default function App() {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
   const [status, setStatus] = useState<GameStatus>("loading");
+  const [error, setError] = useState<string>(""); // holds error message
 
   useEffect(() => {
     const words: string[] = [
@@ -23,22 +24,29 @@ export default function App() {
 
   // Handle submitting a guess
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (currentGuess.length !== 5) return;
-    if (status !== "playing") return;
+  //Warn when guess is not 5 letters long
+  if (currentGuess.length !== 5) {
+    setError("Guess must be 5 letters long");
+    return;
+  }
 
-    const newGuesses = [...guesses, currentGuess];
-    setGuesses(newGuesses);
-    setCurrentGuess("");
+  if (status !== "playing") return;
 
-    if (currentGuess === secretWord) {
-      setStatus("won");
-    } else if (newGuesses.length === 5) {
-      setStatus("lost");
-    }
-  };
+  const newGuesses = [...guesses, currentGuess];
+  setGuesses(newGuesses);
+  setCurrentGuess("");
+  setError(""); // clear error when guess is valid
 
+  if (currentGuess === secretWord) {
+    setStatus("won");
+  } else if (newGuesses.length === 5) {
+    setStatus("lost");
+  }
+};
+
+  
   // Determine colors for each letter in a guess
   const getCellColors = (guess: string, secretWord: string): string[] => {
     const colors: string[] = Array(5).fill("red");
@@ -137,8 +145,23 @@ export default function App() {
               maxLength={5}
               placeholder="ENTER GUESS"
             />
-            <button type="submit">Guess</button>
-          </form>
+           <button type="submit">Guess</button>
+
+  {error && (
+    <div
+      style={{
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        marginTop: 4,
+        color: "red",
+        fontSize: 14,
+      }}
+    >
+      {error}
+    </div>
+  )}
+</form>
         )}
       </div>
     </div>
