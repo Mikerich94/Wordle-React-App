@@ -93,76 +93,48 @@ export default function App() {
           </ul>
         </div>
 
-        {/* Grid */}
-        {Array.from({ length: 5 }).map((_, rowIndex) => {
-          const guess = guesses[rowIndex] || "";
-          const colors = guess
-            ? getCellColors(guess, secretWord)
-            : Array(5).fill("white");
+        <div className="game-wrapper">
+  {/* Grid */}
+  {Array.from({ length: 5 }).map((_, rowIndex) => {
+    const guess = guesses[rowIndex] || "";
+    const colors = guess
+      ? getCellColors(guess, secretWord)
+      : Array(5).fill("white");
 
+    return (
+      <div key={rowIndex} className="grid-row">
+        {Array.from({ length: 5 }).map((_, colIndex) => {
+          const letter = guess[colIndex] || "";
+          const bg = colors[colIndex];
           return (
-            <div key={rowIndex} style={{ display: "flex", justifyContent: "center" }}>
-              {Array.from({ length: 5 }).map((_, colIndex) => {
-                const letter = guess[colIndex] || "";
-                const bg = colors[colIndex];
-
-                return (
-                  <div
-                    key={colIndex}
-                    style={{
-                      backgroundColor: bg,
-                      width: 40,
-                      height: 40,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      margin: 2,
-                      fontWeight: "bold",
-                      fontSize: 20,
-                      color: bg === "red" ? "white" : "black",
-                      border: "2px solid #ccc",   // <--- add this
-                      boxSizing: "border-box",    // ensures border doesn't mess layout
-                    }}
-                  >
-                    {letter}
-                  </div>
-                );
-              })}
+            <div
+              key={colIndex}
+              className="grid-cell"
+              style={{ backgroundColor: bg }}
+            >
+              {letter}
             </div>
           );
         })}
+      </div>
+    );
+  })}
 
-        {status === "won" && <p>You've won! 🎉</p>}
-        {status === "lost" && <p>You've lost! The word was {secretWord}.</p>}
-
-        {status === "playing" && (
-          <form onSubmit={handleSubmit}>
-            <input
-              value={currentGuess}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setCurrentGuess(e.target.value.toUpperCase())
-              }
-              maxLength={5}
-              placeholder="ENTER GUESS"
-            />
-           <button type="submit">Guess</button>
-
-  {error && (
-    <div
-      style={{
-        position: "absolute",
-        top: "100%",
-        left: 0,
-        marginTop: 4,
-        color: "red",
-        fontSize: 14,
-      }}
-    >
-      {error}
-    </div>
+  {/* Guess form */}
+  {status === "playing" && (
+    <form onSubmit={handleSubmit} className="guess-form">
+      <input
+        value={currentGuess}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setCurrentGuess(e.target.value.toUpperCase())
+        }
+        maxLength={5}
+        placeholder="ENTER GUESS"
+      />
+      <button type="submit">Guess</button>
+    </form>
   )}
-</form>
-        )}
+</div>
       </div>
     </div>
   );
