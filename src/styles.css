@@ -273,8 +273,8 @@ form {
   display: flex;
   flex-wrap:wrap;
   justify-content: center;
-  gap: 6px; /* spacing between input and button */
-  width: 100%; /* matches wrapper width */
+  gap: 16px; 
+  width: 100%; 
 }
 
 .guess-form input {
