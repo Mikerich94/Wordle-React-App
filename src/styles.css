@@ -189,3 +189,54 @@ body {
 
   text-align: center;
 }
+
+
+input {
+  width: 200px;
+  padding: 10px 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  border: 2px solid #ccc; 
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-weight: normal;
+}
+
+input:focus {
+  border-color: #333; 
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50; 
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background-color: #45a049; 
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+form {
+  margin-top:16px;
+}
