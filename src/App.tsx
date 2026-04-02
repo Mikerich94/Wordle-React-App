@@ -4,7 +4,7 @@ import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 type GameStatus = "loading" | "playing" | "won" | "lost";
 
 export default function App() {
-  const [secretWord, setSecretWord] = useState<string>("");
+  const [secretWord, setSecretWord] = useState<string>(""); 
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
   const [status, setStatus] = useState<GameStatus>("loading");
@@ -17,6 +17,7 @@ export default function App() {
       "WATER", "LIGHT", "HOUSE", "SOUND", "WORLD"
     ];
 
+    //Randomly select a word from the list and set it as the secret word
     const randomWord = words[Math.floor(Math.random() * words.length)];
     setSecretWord(randomWord);
     setStatus("playing");
@@ -32,13 +33,15 @@ export default function App() {
     return;
   }
 
+  //Prevents guesses from being submitted after game is won or lost
   if (status !== "playing") return;
 
-  const newGuesses = [...guesses, currentGuess];
-  setGuesses(newGuesses);
-  setCurrentGuess("");
+  const newGuesses = [...guesses, currentGuess]; //Takes all previous guesses and adds the new guess to the end of the array
+  setGuesses(newGuesses); //saves updated guess list
+  setCurrentGuess(""); //clears the input field 
   setError(""); // clear error when guess is valid
 
+  //Win/lose conditions
   if (currentGuess === secretWord) {
     setStatus("won");
   } else if (newGuesses.length === 5) {
@@ -49,8 +52,8 @@ export default function App() {
   
   // Determine colors for each letter in a guess
   const getCellColors = (guess: string, secretWord: string): string[] => {
-    const colors: string[] = Array(5).fill("red");
-    const secretLetters: (string | null)[] = secretWord.split("");
+    const colors: string[] = Array(5).fill("#3a3a3c"); //Default to all wrong (gray)
+    const secretLetters: (string | null)[] = secretWord.split(""); //Split the correct word into 5 letters, replace matched letters with null to prevent double counting
 
     // First pass: green matches
     guess.split("").forEach((letter, i) => {
@@ -89,7 +92,7 @@ export default function App() {
           <ul style={{ margin: 0 }}>
             <li style={{ color: "green" }}>Green: Correct letter in the correct position</li>
             <li style={{ color: "#b59f3b" }}>Yellow: Correct letter in the wrong position</li>
-            <li style={{ color: "red" }}>Red: Letter not in the word</li>
+            <li style={{ color: "#3a3a3c" }}>Gray: Letter not in the word</li>
           </ul>
         </div>
 
