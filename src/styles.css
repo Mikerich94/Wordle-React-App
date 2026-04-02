@@ -263,7 +263,7 @@ button:active {
   font-size: 20px;
   border: 2px solid #ccc;
   box-sizing: border-box;
-  color: black;
+  color: #fff;
 }
 
 .guess-form {
