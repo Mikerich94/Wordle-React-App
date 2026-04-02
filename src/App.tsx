@@ -58,17 +58,17 @@ export default function App() {
     // First pass: green matches
     guess.split("").forEach((letter, i) => {
       if (letter === secretLetters[i]) {
-        colors[i] = "green";
+        colors[i] = "#538d4e";
         secretLetters[i] = null;
       }
     });
 
     // Second pass: yellow matches
     guess.split("").forEach((letter, i) => {
-      if (colors[i] !== "green") {
+      if (colors[i] !== "#538d4e") {
         const index = secretLetters.indexOf(letter);
         if (index !== -1) {
-          colors[i] = "yellow";
+          colors[i] = "#b59f3b";
           secretLetters[index] = null;
         }
       }
@@ -90,7 +90,7 @@ export default function App() {
           <p>Try to guess the 5 letter word. You have 5 attempts to do so.</p>
           <p>As you guess, letters will change color to indicate how close your guess is to the secret word.</p>
           <ul style={{ margin: 0 }}>
-            <li style={{ color: "green" }}>Green: Correct letter in the correct position</li>
+            <li style={{ color: "#538d4e" }}>Green: Correct letter in the correct position</li>
             <li style={{ color: "#b59f3b" }}>Yellow: Correct letter in the wrong position</li>
             <li style={{ color: "#3a3a3c" }}>Gray: Letter not in the word</li>
           </ul>
