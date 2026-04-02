@@ -120,6 +120,7 @@ export default function App() {
           );
         })}
       </div>
+      
     );
   })}
 
@@ -141,6 +142,12 @@ export default function App() {
   </div>
 )}
 </div>
+{status === "won" && (
+  <p style={{ color: "#538d4e", fontWeight: "bold" }}>You won! 🎉</p>
+)}
+{status === "lost" && (
+  <p style={{ color: "red", fontWeight: "bold" }}>You lost! The word was {secretWord}.</p>
+)}
       </div>
     </div>
   );
